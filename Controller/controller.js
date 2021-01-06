@@ -1,5 +1,5 @@
 let response = {}
-let services = require('../Services/services')
+let services = require('../Services/service')
 
 class controller {
 
