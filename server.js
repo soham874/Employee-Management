@@ -5,5 +5,5 @@ let port = 3000;
 
 app.listen(port, () => {
     console.log(`Server started successfully at port ${port}`)
-
+    require('./DBManagement/dbManagement')
 })
