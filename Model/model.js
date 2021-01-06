@@ -45,6 +45,16 @@ class Model {
             })
         })
     }
+
+    delete = (req) => {
+        return new Promise((resolve, reject) => {
+            model.deleteOne(req).then((result) => {
+                resolve(result)
+            }).catch((error) => {
+                reject(error)
+            })
+        })
+    }
 }
 
 module.exports = new Model()

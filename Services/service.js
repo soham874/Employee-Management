@@ -17,6 +17,14 @@ class service {
             return ({ message: "Failed to retrive record", data: error })
         })
     }
+
+    deleteService = (req) => {
+        return model.delete(req).then((result) => {
+            return ({ message: "Data deleted successfully", data: result })
+        }).catch((error) => {
+            return ({ message: "Failed to delete record", data: error })
+        })
+    }
 }
 
 module.exports = new service()
