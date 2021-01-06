@@ -17,7 +17,8 @@ const schema = new mongoose.Schema({
     mobile: {
         type: Number,
         required: [true, 'Mobile number is compulsary'],
-        unique: true
+        unique: true,
+        length: 10,
     }
 })
 
@@ -26,14 +27,22 @@ let model = mongoose.model('samples', schema)
 class Model {
 
     create = (req) => {
-        return new Promise((Resolve, Reject) => {
-            model.create(req).then(
-                (result) => {
-                    Resolve(result)
-                }
-            ).catch(
-                (error) => { Reject(error) }
-            )
+        return new Promise((resolve, reject) => {
+            model.create(req).then((result) => {
+                resolve(result)
+            }).catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
+    read = (req) => {
+        return new Promise((resolve, reject) => {
+            model.find({}).then((result) => {
+                resolve(result)
+            }).catch((error) => {
+                reject(error)
+            })
         })
     }
 }
