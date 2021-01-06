@@ -38,7 +38,7 @@ class Model {
 
     read = (req) => {
         return new Promise((resolve, reject) => {
-            model.find({}).then((result) => {
+            model.find(req).then((result) => {
                 resolve(result)
             }).catch((error) => {
                 reject(error)
