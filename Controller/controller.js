@@ -3,8 +3,8 @@ let services = require('../Services/service')
 
 class controller {
 
-    addController = (req, res) => {
-        services.addService(req.body)
+    createController = (req, res) => {
+        services.createService(req.body)
             .then(
                 (result) => {
                     response.success = true

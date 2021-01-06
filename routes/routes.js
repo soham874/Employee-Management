@@ -1,7 +1,7 @@
 let route = require('express').Router()
 let controller = require('../Controller/controller')
 
-route.post('/EmployeeAdd', controller.addController)
+route.post('/EmployeeCreate', controller.createController)
 route.get('/EmployeeRead', controller.getController)
 
 module.exports = route;

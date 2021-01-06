@@ -2,7 +2,7 @@ let model = require('../Model/model')
 
 class service {
 
-    addService = (req) => {
+    createService = (req) => {
         return model.create(req).then((result) => {
             return ({ message: "Adding successful", data: result })
         }).catch((error) => {
