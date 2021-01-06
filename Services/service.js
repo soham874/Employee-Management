@@ -18,6 +18,14 @@ class service {
         })
     }
 
+    updateService = (req) => {
+        return model.update(req).then((result) => {
+            return ({ message: "Data updated successfully", data: result })
+        }).catch((error) => {
+            return ({ message: "Failed to update record", data: error })
+        })
+    }
+
     deleteService = (req) => {
         return model.delete(req).then((result) => {
             return ({ message: "Data deleted successfully", data: result })

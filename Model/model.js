@@ -46,6 +46,16 @@ class Model {
         })
     }
 
+    update = (req) => {
+        return new Promise((resolve, reject) => {
+            model.updateOne(req).then((result) => {
+                resolve(result)
+            }).catch((error) => {
+                reject(error)
+            })
+        })
+    }
+
     delete = (req) => {
         return new Promise((resolve, reject) => {
             model.deleteOne(req).then((result) => {
