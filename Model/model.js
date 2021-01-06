@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+//company name, salary, designation
 const schema = new mongoose.Schema({
     firstName: {
         type: String,
