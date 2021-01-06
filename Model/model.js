@@ -23,15 +23,13 @@ const schema = new mongoose.Schema({
 let model = mongoose.model('', schema)
 
 class Model {
-
     create = (req) => {
-        let modelPromise = new Promise((Resolve, Reject) => {
+        return modelPromise = new Promise((Resolve, Reject) => {
             model.create(req)
-        }).then(
-            () => { Resolve(result) },
-            () => { Reject(error) }
-        )
-        return modelPromise
+                .then(
+                    () => { Resolve(result) },
+                    () => { Reject(error) })
+        })
     }
 }
 
