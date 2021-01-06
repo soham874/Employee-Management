@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     }
 })
 
-let model = mongoose.model('', schema)
+let model = mongoose.model('sample', schema)
 
 class Model {
     create = (req) => {
