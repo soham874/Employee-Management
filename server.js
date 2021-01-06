@@ -1,9 +1,8 @@
-const app = require('express')()
+const exp = require('express')
+const app = exp()
 const route = require('./routes/routes')
 
 let port = 3000;
-
-app.use(require('express').json())
 
 app.listen(port, () => {
     console.log(`Server started successfully at port ${port}\n`)
