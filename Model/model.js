@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-//company name, salary, designation, address
 const schema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -21,17 +20,19 @@ const schema = new mongoose.Schema({
     }
 })
 
-let model = mongoose.model('sample', schema)
+let model = mongoose.model('samples', schema)
 
 class Model {
+
     create = (req) => {
-        return new Promise((resolve, reject) => {
-            model.create(req)
-                .then(
-                    (result) => { resolve(result) },
-                ).catch(
-                    (error) => { reject(error) }
-                )
+        return new Promise((Resolve, Reject) => {
+            model.create(req).then(
+                (result) => {
+                    Resolve(result)
+                }
+            ).catch(
+                (error) => { Reject(error) }
+            )
         })
     }
 }
