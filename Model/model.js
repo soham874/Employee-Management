@@ -34,47 +34,63 @@ const schema = new mongoose.Schema({
 
 let model = mongoose.model('samples', schema)
 
-class Model {
+class employeeModel {
 
-    create = (req) => {
-        return new Promise((resolve, reject) => {
-            model.create(req).then((result) => {
-                resolve(result)
-            }).catch((error) => {
-                reject(error)
+    create = (req, errorfunction) => {
+        try {
+            return new Promise((resolve, reject) => {
+                model.create(req).then((result) => {
+                    resolve(result)
+                }).catch((error) => {
+                    reject(error)
+                })
             })
-        })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 
-    read = (req) => {
-        return new Promise((resolve, reject) => {
-            model.find(req).then((result) => {
-                resolve(result)
-            }).catch((error) => {
-                reject(error)
+    read = (req, errorfunction) => {
+        try {
+            return new Promise((resolve, reject) => {
+                model.find(req).then((result) => {
+                    resolve(result)
+                }).catch((error) => {
+                    reject(error)
+                })
             })
-        })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 
-    update = (req) => {
-        return new Promise((resolve, reject) => {
-            model.updateOne(req).then((result) => {
-                resolve(result)
-            }).catch((error) => {
-                reject(error)
+    update = (req, errorfunction) => {
+        try {
+            return new Promise((resolve, reject) => {
+                model.updateOne(req).then((result) => {
+                    resolve(result)
+                }).catch((error) => {
+                    reject(error)
+                })
             })
-        })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 
-    delete = (req) => {
-        return new Promise((resolve, reject) => {
-            model.deleteOne(req).then((result) => {
-                resolve(result)
-            }).catch((error) => {
-                reject(error)
+    delete = (req, errorfunction) => {
+        try {
+            return new Promise((resolve, reject) => {
+                model.deleteOne(req).then((result) => {
+                    resolve(result)
+                }).catch((error) => {
+                    reject(error)
+                })
             })
-        })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 }
 
-module.exports = new Model()
+module.exports = new employeeModel()

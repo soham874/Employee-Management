@@ -5,69 +5,86 @@ const patternFirstName = RegExp('^[A-Z][a-z]{2,}$')
 const patternPhoneNumber = RegExp('^[0-9]{10}$')
 const patternEmail = RegExp('^[a-z0-9]+([._+-][a-z0-9]+)*(@)[0-9a-zA-Z]+[.]{1}[a-z]{2,3}([.][a-z]{2})?$')
 
-class controller {
+class employeeController {
 
-    createController = (req, res) => {
+    createController = (req, res, next) => {
 
-        if (!this.validate(req)) {
-            console.log("Information not according to pattern.")
-            return res.status(400).send(response)
+        try {
+            if (!this.validate(req)) {
+                console.log("Information not according to pattern.")
+                response.success = false
+                response.message = "Information not according to pattern."
+                return res.status(400).send(response)
+            }
+            services.createService(req.body, next).then((result) => {
+                response.success = true
+                response.message = result.message
+                response.data = result.data
+                return res.status(200).send(response)
+            }).catch((error) => {
+                response.success = false
+                response.message = error.message
+                response.error = error.error
+                return res.status(400).send(response)
+            })
+        } catch (err) {
+            next(err)
         }
 
-        services.createService(req.body).then((result) => {
-            response.success = true
-            response.message = result.message
-            response.data = result.data
-            return res.status(200).send(response)
-        }).catch((error) => {
-            response.success = false
-            response.message = error.message
-            response.error = error.error
-            return res.status(400).send(response)
-        })
-
     }
 
-    getController = (req, res) => {
-        services.getService(req.body).then((result) => {
-            response.success = true
-            response.message = result.message
-            response.data = result.data
-            return res.status(200).send(response)
-        }).catch((error) => {
-            response.success = false
-            response.message = error.message
-            response.error = error.error
-            return res.status(400).send(response)
-        })
+    getController = (req, res, next) => {
+        try {
+            services.getService(req.body, next).then((result) => {
+                response.success = true
+                response.message = result.message
+                response.data = result.data
+                return res.status(200).send(response)
+            }).catch((error) => {
+                response.success = false
+                response.message = error.message
+                response.error = error.error
+                return res.status(400).send(response)
+            })
+        } catch (err) {
+            next(err)
+        }
     }
 
-    updateController = (req, res) => {
-        services.updateService(req.body).then((result) => {
-            response.success = true
-            response.message = result.message
-            response.data = result.data
-            return res.status(200).send(response)
-        }).catch((error) => {
-            response.success = false
-            response.message = error.message
-            response.error = error.error
-            return res.status(400).send(response)
-        })
+    updateController = (req, res, next) => {
+        try {
+            services.updateService(req.body, next).then((result) => {
+                response.success = true
+                response.message = result.message
+                response.data = result.data
+                return res.status(200).send(response)
+            }).catch((error) => {
+                response.success = false
+                response.message = error.message
+                response.error = error.error
+                return res.status(400).send(response)
+            })
+        } catch (err) {
+            next(err)
+        }
     }
 
-    deleteController = (req, res) => {
-        services.deleteService(req.body).then((result) => {
-            response.success = true
-            response.message = result.message
-            response.data = result.data
-            return res.status(200).send(response)
-        }).catch((error) => {
-            response.success = false
-            response.message = error.message
-            response.error = error.error
-            return res.status(400).send(response)
-        })
+    deleteController = (req, res, next) => {
+        try {
+            services.deleteService(req.body, next).then((result) => {
+                response.success = true
+                response.message = result.message
+                response.data = result.data
+                return res.status(200).send(response)
+            }).catch((error) => {
+                response.success = false
+                response.message = error.message
+                response.error = error.error
+                return res.status(400).send(response)
+            })
+        } catch (err) {
+            next(err)
+        }
     }
 
     validate = (req) => {
@@ -94,4 +111,9 @@ class controller {
     }
 }
 
-module.exports = new controller()
+module.exports = new employeeController()
+
+next = (err) => {
+    console.log(err)
+    console.log("API has crashed.")
+}

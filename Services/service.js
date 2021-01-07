@@ -1,38 +1,54 @@
 let model = require('../Model/model')
 
-class service {
+class employeeService {
 
-    createService = (req) => {
-        return model.create(req).then((result) => {
-            return ({ message: "Adding successful", data: result })
-        }).catch((error) => {
-            return ({ message: "Failed to add record", data: error })
-        })
+    createService = (req, errorfunction) => {
+        try {
+            return model.create(req, errorfunction).then((result) => {
+                return ({ message: "Adding successful", data: result })
+            }).catch((error) => {
+                return ({ message: "Failed to add record", data: error })
+            })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 
-    getService = (req) => {
-        return model.read(req).then((result) => {
-            return ({ message: "Data retrived successfully", data: result })
-        }).catch((error) => {
-            return ({ message: "Failed to retrive record", data: error })
-        })
+    getService = (req, errorfunction) => {
+        try {
+            return model.read(req, errorfunction).then((result) => {
+                return ({ message: "Data retrived successfully", data: result })
+            }).catch((error) => {
+                return ({ message: "Failed to retrive record", data: error })
+            })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 
-    updateService = (req) => {
-        return model.update(req).then((result) => {
-            return ({ message: "Data updated successfully", data: result })
-        }).catch((error) => {
-            return ({ message: "Failed to update record", data: error })
-        })
+    updateService = (req, errorfunction) => {
+        try {
+            return model.update(req, errorfunction).then((result) => {
+                return ({ message: "Data updated successfully", data: result })
+            }).catch((error) => {
+                return ({ message: "Failed to update record", data: error })
+            })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 
-    deleteService = (req) => {
-        return model.delete(req).then((result) => {
-            return ({ message: "Data deleted successfully", data: result })
-        }).catch((error) => {
-            return ({ message: "Failed to delete record", data: error })
-        })
+    deleteService = (req, errorfunction) => {
+        try {
+            return model.delete(req, errorfunction).then((result) => {
+                return ({ message: "Data deleted successfully", data: result })
+            }).catch((error) => {
+                return ({ message: "Failed to delete record", data: error })
+            })
+        } catch (err) {
+            errorfunction(err)
+        }
     }
 }
 
-module.exports = new service()
+module.exports = new employeeService()
