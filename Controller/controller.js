@@ -35,7 +35,7 @@ class employeeController {
 
     getController = (req, res, errorfunction) => {
         try {
-            services.getService(req.body, next).then((result) => {
+            services.getService(req, errorfunction).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data
@@ -53,7 +53,7 @@ class employeeController {
 
     updateController = (req, res, errorfunction) => {
         try {
-            services.updateService(req.body, errorfunction).then((result) => {
+            services.updateService(req, errorfunction).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data
@@ -71,7 +71,7 @@ class employeeController {
 
     deleteController = (req, res, errorfunction) => {
         try {
-            services.deleteService(req.body, errorfunction).then((result) => {
+            services.deleteService(req, errorfunction).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data
@@ -116,4 +116,7 @@ module.exports = new employeeController()
 errorfunction = (err) => {
     console.log(err)
     console.log("API has crashed.")
+    response.success = false
+    response.message = "API crash"
+    return res.status(400).send(response)
 }

@@ -53,11 +53,20 @@ class employeeModel {
     read = (req, errorfunction) => {
         try {
             return new Promise((resolve, reject) => {
-                model.find(req).then((result) => {
+
+                if (req.params.key != null)
+                    model.findById(req.params.key).then((result) => {
+                        resolve(result)
+                    }).catch((error) => {
+                        reject(error)
+                    })
+
+                model.find({}).then((result) => {
                     resolve(result)
                 }).catch((error) => {
                     reject(error)
                 })
+
             })
         } catch (err) {
             errorfunction(err)
@@ -67,7 +76,8 @@ class employeeModel {
     update = (req, errorfunction) => {
         try {
             return new Promise((resolve, reject) => {
-                model.updateOne(req).then((result) => {
+
+                model.findByIdAndUpdate(req.params._id, req.body).then((result) => {
                     resolve(result)
                 }).catch((error) => {
                     reject(error)
@@ -81,7 +91,7 @@ class employeeModel {
     delete = (req, errorfunction) => {
         try {
             return new Promise((resolve, reject) => {
-                model.deleteOne(req).then((result) => {
+                model.findByIdAndDelete(req.params._id).then((result) => {
                     resolve(result)
                 }).catch((error) => {
                     reject(error)
