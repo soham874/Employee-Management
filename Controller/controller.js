@@ -11,12 +11,11 @@ class employeeController {
 
         try {
             if (!this.validate(req)) {
-                console.log("Information not according to pattern.")
                 response.success = false
                 response.message = "Information not according to pattern."
                 return res.status(400).send(response)
             }
-            services.createService(req.body, next).then((result) => {
+            services.createService(req.body).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data
@@ -35,7 +34,7 @@ class employeeController {
 
     getController = (req, res, next) => {
         try {
-            services.getService(req, next).then((result) => {
+            services.getService(req).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data

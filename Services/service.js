@@ -4,7 +4,7 @@ class employeeService {
 
     createService = (req, next) => {
         try {
-            return model.create(req, next).then((result) => {
+            return model.create(req).then((result) => {
                 return ({ message: "Adding successful", data: result })
             }).catch((error) => {
                 return ({ message: "Failed to add record", data: error })
@@ -16,7 +16,7 @@ class employeeService {
 
     getService = (req, next) => {
         try {
-            return model.read(req, errorfunction).then((result) => {
+            return model.read(req).then((result) => {
                 return ({ message: "Data retrived successfully", data: result })
             }).catch((error) => {
                 return ({ message: "Failed to retrive record", data: error })

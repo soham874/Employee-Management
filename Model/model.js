@@ -54,8 +54,8 @@ class employeeModel {
         try {
             return new Promise((resolve, reject) => {
 
-                if (req.params.key != null)
-                    model.findById(req.params.key).then((result) => {
+                if (req.params._id != null)
+                    model.findById(req.params._id).then((result) => {
                         resolve(result)
                     }).catch((error) => {
                         reject(error)

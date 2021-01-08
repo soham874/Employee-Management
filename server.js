@@ -11,7 +11,7 @@ let response = {}
 app.use((err, req, res, next) => {
     response.succes = "false"
     response.message = "API has crashed"
-    response.err = err
+    response.error = err.err
     res.status(500).send(response)
 })
 
