@@ -9,9 +9,8 @@ app.use('/', route)
 
 let response = {}
 app.use((err, req, res, next) => {
-    response.succes = "false"
+    response.success = "false"
     response.message = "API has crashed"
-    response.error = err.err
     res.status(500).send(response)
 })
 

@@ -28,7 +28,7 @@ class employeeService {
 
     updateService = (req, next) => {
         try {
-            return model.update(req, errorfunction).then((result) => {
+            return model.update(req).then((result) => {
                 return ({ message: "Data updated successfully", data: result })
             }).catch((error) => {
                 return ({ message: "Failed to update record", data: error })

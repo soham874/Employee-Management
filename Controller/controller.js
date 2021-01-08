@@ -52,7 +52,7 @@ class employeeController {
 
     updateController = (req, res, next) => {
         try {
-            services.updateService(req, next).then((result) => {
+            services.updateService(req).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data
