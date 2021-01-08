@@ -36,7 +36,7 @@ let model = mongoose.model('samples', schema)
 
 class employeeModel {
 
-    create = (req, errorfunction) => {
+    create = (req, next) => {
         try {
             return new Promise((resolve, reject) => {
                 model.create(req).then((result) => {
@@ -46,11 +46,11 @@ class employeeModel {
                 })
             })
         } catch (err) {
-            errorfunction(err)
+            next(err)
         }
     }
 
-    read = (req, errorfunction) => {
+    read = (req, next) => {
         try {
             return new Promise((resolve, reject) => {
 
@@ -69,11 +69,11 @@ class employeeModel {
 
             })
         } catch (err) {
-            errorfunction(err)
+            next(err)
         }
     }
 
-    update = (req, errorfunction) => {
+    update = (req, next) => {
         try {
             return new Promise((resolve, reject) => {
 
@@ -84,11 +84,11 @@ class employeeModel {
                 })
             })
         } catch (err) {
-            errorfunction(err)
+            next(err)
         }
     }
 
-    delete = (req, errorfunction) => {
+    delete = (req, next) => {
         try {
             return new Promise((resolve, reject) => {
                 model.findByIdAndDelete(req.params._id).then((result) => {
@@ -98,7 +98,7 @@ class employeeModel {
                 })
             })
         } catch (err) {
-            errorfunction(err)
+            next(err)
         }
     }
 }
