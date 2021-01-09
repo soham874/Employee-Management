@@ -4,8 +4,10 @@ const { body, validationResult } = require('express-validator');
 class validator {
 
     validation = () => {
-        body('username').isEmail(),
-            body('password').isLength({ min: 5 }),
+        console.log(body('firstName'))
+
+        body('firstName').isEmail(), body('password').isLength({ min: 5 }),
+
             (req, res) => {
                 const errors = validationResult(req);
 

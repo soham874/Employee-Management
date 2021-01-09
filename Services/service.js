@@ -16,7 +16,12 @@ class employeeService {
 
     getService = (req, next) => {
         try {
-            return model.read(req).then((result) => {
+            let request = {}
+
+            if (req.params._id != null)
+                request._id = req.params._id
+
+            return model.read(request).then((result) => {
                 return ({ message: "Data retrived successfully", data: result })
             }).catch((error) => {
                 return ({ message: "Failed to retrive record", data: error })

@@ -55,15 +55,7 @@ class employeeModel {
     read = (req, next) => {
         try {
             return new Promise((resolve, reject) => {
-
-                if (req.params._id != null)
-                    model.findById(req.params._id).then((result) => {
-                        resolve(result)
-                    }).catch((error) => {
-                        reject(error)
-                    })
-
-                model.find({}).then((result) => {
+                model.find(req).then((result) => {
                     resolve(result)
                 }).catch((error) => {
                     reject(error)
