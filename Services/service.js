@@ -4,6 +4,7 @@ class employeeService {
 
     createService = (req, next) => {
         try {
+            console.log("in service")
             return model.create(req).then((result) => {
                 return ({ message: "Adding successful", data: result })
             }).catch((error) => {

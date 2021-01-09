@@ -15,6 +15,7 @@ class employeeController {
             //     response.message = "Information not according to pattern."
             //     return res.status(400).send(response)
             // }
+            console.log("in controller")
             services.createService(req.body).then((result) => {
                 response.success = true
                 response.message = result.message

@@ -40,6 +40,7 @@ class employeeModel {
 
     create = (req, next) => {
         try {
+            console.log("in model")
             return new Promise((resolve, reject) => {
                 model.create(req).then((result) => {
                     resolve(result)
