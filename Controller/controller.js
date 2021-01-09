@@ -70,7 +70,7 @@ class employeeController {
 
     deleteController = (req, res, next) => {
         try {
-            services.deleteService(req, next).then((result) => {
+            services.deleteService(req).then((result) => {
                 response.success = true
                 response.message = result.message
                 response.data = result.data
