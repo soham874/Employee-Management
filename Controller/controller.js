@@ -10,22 +10,16 @@ class employeeController {
     createController = (req, res, next) => {
 
         try {
-            // if (!this.validate(req)) {
-            //     response.success = false
-            //     response.message = "Information not according to pattern."
-            //     return res.status(400).send(response)
-            // }
-            console.log("in controller")
             services.createService(req.body).then((result) => {
-                response.success = true
+                response.success = result.success
                 response.message = result.message
                 response.data = result.data
-                return res.status(200).send(response)
+                return res.status(result.statusCode).send(response)
             }).catch((error) => {
-                response.success = false
+                response.success = error.success
                 response.message = error.message
                 response.error = error.error
-                return res.status(400).send(response)
+                return res.status(error.statusCode).send(response)
             })
         } catch (err) {
             next(err)
@@ -36,15 +30,15 @@ class employeeController {
     getController = (req, res, next) => {
         try {
             services.getService(req).then((result) => {
-                response.success = true
+                response.success = result.success
                 response.message = result.message
                 response.data = result.data
-                return res.status(200).send(response)
+                return res.status(result.statusCode).send(response)
             }).catch((error) => {
-                response.success = false
+                response.success = error.success
                 response.message = error.message
                 response.error = error.error
-                return res.status(400).send(response)
+                return res.status(error.statusCode).send(response)
             })
         } catch (err) {
             next(err)
@@ -54,15 +48,15 @@ class employeeController {
     updateController = (req, res, next) => {
         try {
             services.updateService(req).then((result) => {
-                response.success = true
+                response.success = result.success
                 response.message = result.message
                 response.data = result.data
-                return res.status(200).send(response)
+                return res.status(result.statusCode).send(response)
             }).catch((error) => {
-                response.success = false
+                response.success = error.success
                 response.message = error.message
                 response.error = error.error
-                return res.status(400).send(response)
+                return res.status(error.statusCode).send(response)
             })
         } catch (err) {
             next(err)
@@ -72,43 +66,21 @@ class employeeController {
     deleteController = (req, res, next) => {
         try {
             services.deleteService(req).then((result) => {
-                response.success = true
+                response.success = result.success
                 response.message = result.message
                 response.data = result.data
-                return res.status(200).send(response)
+                return res.status(result.statusCode).send(response)
             }).catch((error) => {
-                response.success = false
+                response.success = error.success
                 response.message = error.message
                 response.error = error.error
-                return res.status(400).send(response)
+                return res.status(error.statusCode).send(response)
             })
         } catch (err) {
             next(err)
         }
     }
 
-    validate = (req) => {
-
-        if (!patternFirstName.test(req.body.firstName))
-            return false
-
-        if (!patternFirstName.test(req.body.lastName))
-            return false
-
-        if (!patternEmail.test(req.body.email))
-            return false
-
-        if (!patternPhoneNumber.test(req.body.mobile))
-            return false
-
-        if (!patternFirstName.test(req.body.companyName))
-            return false
-
-        if (!patternFirstName.test(req.body.designation))
-            return false
-
-        return true
-    }
 }
 
 module.exports = new employeeController()

@@ -2,19 +2,25 @@ const { body, validationResult } = require('express-validator')
 
 
 class validator {
+
     userValidation = () => {
         return [
-            body('email').isEmail(),
-            body('mobile').isLength({ min: 5 })
+            body('firstName').isLength({ min: 3 }).withMessage('First name not matching'),
+            body('lastName').isLength({ min: 3 }).withMessage('Last Name not matching'),
+            body('email').isEmail().withMessage('Email not matching'),
+            body('mobile').isNumeric().isLength({ min: 10, max: 10 }).withMessage('Phone number not matching'),
+            body('companyName').isLength({ min: 3 }).withMessage('Company Name not matching'),
+            body('salary'),
+            body('designation').isLength({ min: 3 }).withMessage('Designation not matching'),
         ]
     }
 
     validate = (req, res, next) => {
         const result = validationResult(req);
-        if (result.isEmpty()) {
+        if (result.isEmpty())
             return next();
-        }
-        res.status(422).json({ errors: result.array() })
+
+        res.status(400).json({ errors: result.array() })
     }
 
 

@@ -6,9 +6,9 @@ class employeeService {
         try {
             console.log("in service")
             return model.create(req).then((result) => {
-                return ({ message: "Adding successful", data: result })
+                return ({ success: true, statusCode: 200, message: "Adding successful", data: result })
             }).catch((error) => {
-                return ({ message: "Failed to add record", data: error })
+                return ({ success: false, statusCode: 400, message: "Failed to add record", data: error })
             })
         } catch (err) {
             next(err)
@@ -23,9 +23,12 @@ class employeeService {
                 request._id = req.params._id
 
             return model.read(request).then((result) => {
-                return ({ message: "Data retrived successfully", data: result })
+                if (result[1] == null)
+                    return ({ success: false, statusCode: 400, message: "Failed to retrive any record", data: error })
+
+                return ({ success: true, statusCode: 200, message: "Data retrived successfully", data: result })
             }).catch((error) => {
-                return ({ message: "Failed to retrive record", data: error })
+                return ({ success: false, statusCode: 400, message: "Failed to retrive any record", data: error })
             })
         } catch (err) {
             next(err)
@@ -35,9 +38,9 @@ class employeeService {
     updateService = (req, next) => {
         try {
             return model.update(req).then((result) => {
-                return ({ message: "Data updated successfully", data: result })
+                return ({ success: true, statusCode: 200, message: "Data updated successfully", data: result })
             }).catch((error) => {
-                return ({ message: "Failed to update record", data: error })
+                return ({ success: false, statusCode: 400, message: "Failed to update record", data: error })
             })
         } catch (err) {
             next(err)
@@ -47,9 +50,9 @@ class employeeService {
     deleteService = (req, next) => {
         try {
             return model.delete(req, next).then((result) => {
-                return ({ message: "Data deleted successfully", data: result })
+                return ({ success: true, statusCode: 200, message: "Data deleted successfully", data: result })
             }).catch((error) => {
-                return ({ message: "Failed to delete record", data: error })
+                return ({ success: false, statusCode: 400, message: "Failed to delete record", data: error })
             })
         } catch (err) {
             next(err)
