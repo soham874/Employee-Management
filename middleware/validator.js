@@ -1,25 +1,23 @@
 const { body, validationResult } = require('express-validator')
 
-class validator {
-    userValidationRules = () => {
 
-        console.log(body)
+class validator {
+    userValidation = () => {
         return [
-            // username must be an email
-            body("email").isEmail(),
-            body("mobile").isLength(10),
+            body('email').isEmail(),
+            body('mobile').isLength({ min: 5 })
         ]
     }
 
-    validate = (req, res) => {
-        console.log("check 1")
-        const errors = validationResult(req)
-        console.log(errors)
-
-        if (!errors.isEmpty())
-            return res.status(500).send({ "message": "error happened" })
-
+    validate = (req, res, next) => {
+        const result = validationResult(req);
+        if (result.isEmpty()) {
+            return next();
+        }
+        res.status(422).json({ errors: result.array() })
     }
+
+
 }
 
 module.exports = new validator()

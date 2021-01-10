@@ -1,8 +1,8 @@
 let route = require('express').Router()
 let controller = require('../Controller/controller')
-let validator = require('../middleware/validator')
+const validator = require('../middleware/validator')
 
-route.post('/employee/create', validator.userValidationRules, validator.userValidationRules, controller.createController)
+route.post('/employee/create', validator.userValidation(), validator.validate, controller.createController)
 
 route.post('/employee/read/:_id', controller.getController)
 route.get('/employee/read', controller.getController)
