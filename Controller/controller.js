@@ -1,10 +1,6 @@
 let response = {}
 let services = require('../Services/service')
 
-const patternFirstName = RegExp('^[A-Z][a-z]{2,}$')
-const patternPhoneNumber = RegExp('^[0-9]{10}$')
-const patternEmail = RegExp('^[a-z0-9]+([._+-][a-z0-9]+)*(@)[0-9a-zA-Z]+[.]{1}[a-z]{2,3}([.][a-z]{2})?$')
-
 class employeeController {
 
     createController = (req, res, next) => {
