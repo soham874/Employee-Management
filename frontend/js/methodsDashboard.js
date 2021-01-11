@@ -73,10 +73,10 @@ function loadTable(json) {
         }
 
         //adding edit icon
-        output += `<td><img class="icon" id="edit${i+1}" src="../assets/ButtonAsset1.png"></button></td>`
+        output += `<td><img class="icon" id="edit${i+1}" src="../assets/ButtonAsset1.png" onclick="clicked(id)"></button></td>`
 
         //adding delete icon
-        output += `<td><img class="icon" id="delete${i+1}" src="../assets/ButtonAsset2.png"></button></td>`
+        output += `<td><img class="icon" id="delete${i+1}" src="../assets/ButtonAsset2.png" onclick="clicked(id)"></button></td>`
 
         output += '</tr>'
     }
@@ -85,4 +85,8 @@ function loadTable(json) {
     document.getElementById('dvTable').innerHTML = output
 }
 
-module.exports = { id }
+clicked = (elemId) => {
+    sessionStorage.setItem('idNumber', elemId.split('edit')[1] * 1)
+    sessionStorage.setItem('data', data)
+    window.open("../html/AddEdit.html", "_self")
+}
