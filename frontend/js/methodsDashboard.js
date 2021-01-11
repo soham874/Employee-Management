@@ -86,7 +86,9 @@ function loadTable(json) {
 }
 
 clicked = (elemId) => {
+
     sessionStorage.setItem('idNumber', elemId.split('edit')[1] * 1)
-    sessionStorage.setItem('data', data)
+    sessionStorage.setItem('data', JSON.stringify(data))
+    sessionStorage.setItem('keys', keyNames)
     window.open("../html/AddEdit.html", "_self")
 }
