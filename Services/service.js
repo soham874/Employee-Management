@@ -4,7 +4,6 @@ class employeeService {
 
     createService = (req, next) => {
         try {
-            console.log("in service")
             return model.create(req).then((result) => {
                 return ({ success: true, statusCode: 200, message: "Adding successful", data: result })
             }).catch((error) => {
@@ -23,7 +22,8 @@ class employeeService {
                 request._id = req.params._id
 
             return model.read(request).then((result) => {
-                if (result[1] == null)
+
+                if (result[0] == null)
                     return ({ success: false, statusCode: 400, message: "Failed to retrive any record", data: error })
 
                 return ({ success: true, statusCode: 200, message: "Data retrived successfully", data: result })
