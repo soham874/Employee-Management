@@ -45,7 +45,6 @@ let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "sala
 let output = '<table>'
 
 $(document).ready(function() {
-    alert(data[0].firstName)
     loadTable(data)
 })
 
@@ -54,7 +53,8 @@ function loadTable(json) {
     let rows = json.length
     let columns = Object.keys(json[0]).length //7 columns
 
-    //adding table headings
+    document.getElementById("info").innerHTML = `${rows} entries found!`
+        //adding table headings
     output += '<tr>'
     for (let i = 0; i < columns; i++) {
         output += `<th>${heading[i]}</th>`
@@ -64,9 +64,17 @@ function loadTable(json) {
     //adding table rows
     for (let i = 0; i < rows; i++) {
         output += '<tr>'
+
         for (let j = 0; j < columns; j++) {
             output += `<td>${json[i][keyNames[j]]}</td>`
         }
+
+        //adding edit icon
+        output += `<td><img class="icon" id="edit${i}" src="../assets/ButtonAsset1.png"></button></td>`
+
+        //adding delete icon
+        output += `<td><img class="icon" id="delete${i}" src="../assets/ButtonAsset2.png"></button></td>`
+
         output += '</tr>'
     }
 
