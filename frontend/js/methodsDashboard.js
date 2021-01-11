@@ -76,7 +76,7 @@ function loadTable(json) {
         output += `<td><img class="icon" id="edit${i+1}" src="../assets/ButtonAsset1.png" onclick="clicked(id)"></button></td>`
 
         //adding delete icon
-        output += `<td><img class="icon" id="delete${i+1}" src="../assets/ButtonAsset2.png" onclick="clicked(id)"></button></td>`
+        output += `<td><img class="icon" id="delete${i+1}" src="../assets/ButtonAsset2.png"></button></td>`
 
         output += '</tr>'
     }
