@@ -5,6 +5,7 @@ class validator {
 
     userValidation = () => {
         return [
+
             body('firstName').isLength({ min: 3 }).withMessage('First name not matching'),
             body('lastName').isLength({ min: 3 }).withMessage('Last Name not matching'),
             body('email').isEmail().withMessage('Email not matching'),
@@ -12,6 +13,8 @@ class validator {
             body('companyName').isLength({ min: 3 }).withMessage('Company Name not matching'),
             body('salary'),
             body('designation').isLength({ min: 3 }).withMessage('Designation not matching'),
+
+            this.validate
         ]
     }
 
