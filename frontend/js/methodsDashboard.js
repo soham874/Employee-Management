@@ -39,6 +39,8 @@ let data = [{
     "designation": "Singer"
 }]
 
+let id = 0
+
 let heading = ["First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation"]
 let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "salary", "designation"]
 
@@ -54,7 +56,8 @@ function loadTable(json) {
     let columns = Object.keys(json[0]).length //7 columns
 
     document.getElementById("info").innerHTML = `${rows} entries found!`
-        //adding table headings
+
+    //adding table headings
     output += '<tr>'
     for (let i = 0; i < columns; i++) {
         output += `<th>${heading[i]}</th>`
@@ -70,10 +73,10 @@ function loadTable(json) {
         }
 
         //adding edit icon
-        output += `<td><img class="icon" id="edit${i}" src="../assets/ButtonAsset1.png"></button></td>`
+        output += `<td><img class="icon" id="edit${i+1}" src="../assets/ButtonAsset1.png"></button></td>`
 
         //adding delete icon
-        output += `<td><img class="icon" id="delete${i}" src="../assets/ButtonAsset2.png"></button></td>`
+        output += `<td><img class="icon" id="delete${i+1}" src="../assets/ButtonAsset2.png"></button></td>`
 
         output += '</tr>'
     }
@@ -81,3 +84,5 @@ function loadTable(json) {
     output += '</table>'
     document.getElementById('dvTable').innerHTML = output
 }
+
+module.exports = { id }
