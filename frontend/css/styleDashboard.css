@@ -1,0 +1,30 @@
+.header {
+    padding: 20px 0 20px 0;
+    width: 100%;
+    text-align: center;
+    font-size: xx-large;
+    background-color: coral;
+    color: white;
+}
+
+.info {
+    padding: 20px 0 20px 10px;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.dvTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: cornsilk;
+}
