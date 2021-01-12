@@ -13,18 +13,23 @@
     font-weight: bolder;
 }
 
-.dvTable {
-    border-collapse: collapse;
+#dvTable {
     width: 100%;
     overflow-x: auto;
 }
 
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 td,
 th {
-    border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
     font-size: 20px;
+    border: none;
 }
 
 tr:nth-child(odd) {
@@ -44,8 +49,7 @@ img {
 }
 
 #edit0 {
-    margin-left: 10px;
-    margin-top: 1%;
+    margin: 50px;
     padding: 10px;
     background-color: white;
     display: flex;
@@ -55,12 +59,10 @@ img {
     font-weight: bolder;
     border-radius: 10px;
     transition: all 0.5s;
-    background-color: steelblue;
     appearance: none;
 }
 
 #edit0:hover {
     transform: scale(1.05);
     transition: all 0.5s;
-    background-color: white;
 }

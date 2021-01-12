@@ -41,7 +41,7 @@ let data = [{
 
 let id = 0
 
-let heading = ["First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation"]
+let heading = ["First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation", "Edit", "Delete"]
 let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "salary", "designation"]
 
 let output = '<table>'
@@ -55,11 +55,9 @@ function loadTable(json) {
     let rows = json.length
     let columns = Object.keys(json[0]).length //7 columns
 
-    document.getElementById("info").innerHTML = `${rows} entries found!`
-
     //adding table headings
     output += '<tr>'
-    for (let i = 0; i < columns; i++) {
+    for (let i = 0; i < columns + 2; i++) {
         output += `<th>${heading[i]}</th>`
     }
     output += '</tr>'
@@ -69,7 +67,10 @@ function loadTable(json) {
         output += '<tr>'
 
         for (let j = 0; j < columns; j++) {
-            output += `<td>${json[i][keyNames[j]]}</td>`
+            let input = json[i][keyNames[j]]
+            if (input == null)
+                input = 'N/A'
+            output += `<td>${input}</td>`
         }
 
         //adding edit icon

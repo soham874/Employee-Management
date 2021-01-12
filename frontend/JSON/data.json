@@ -1,0 +1,40 @@
+[{
+    "firstName": "Soham",
+    "lastName": "Choudhury",
+    "email": "soham874@gmail.com",
+    "mobile": 9002832439,
+    "companyName": "Bridgelabz",
+    "salary": 1000,
+    "designation": "Student"
+}, {
+    "firstName": "Rakesh",
+    "lastName": "Sharma",
+    "email": "sharmarakesh@gmail.com",
+    "mobile": 9932629575,
+    "companyName": "Nasa",
+    "designation": "Engineer"
+}, {
+    "firstName": "Ravi",
+    "lastName": "Sashtri",
+    "email": "something@gmail.com",
+    "mobile": 9873764563,
+    "companyName": "Bcci",
+    "salary": 100000,
+    "designation": "Coach"
+}, {
+    "firstName": "Virat",
+    "lastName": "Kohli",
+    "email": "captain@gmail.com",
+    "mobile": 8523697412,
+    "companyName": "Bcci",
+    "salary": 34567,
+    "designation": "Batsman"
+}, {
+    "firstName": "Bappi",
+    "lastName": "Lahiri",
+    "email": "bappilahirirockz@gmail.com",
+    "mobile": 9878909876,
+    "companyName": "Bollywood",
+    "salary": 50000,
+    "designation": "Singer"
+}]
