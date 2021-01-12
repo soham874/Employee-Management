@@ -14,11 +14,9 @@ select {
 }
 
 button {
-    margin-left: 10px;
-    margin-top: 1%;
+    text-align: center;
     padding: 10px;
     background-color: steelblue;
-    padding: 14px 20px;
     border-radius: 10px;
     transition: all 0.5s;
     cursor: pointer;
