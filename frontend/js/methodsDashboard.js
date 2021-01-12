@@ -40,8 +40,9 @@ let data = [{
 }]
 
 let id = 0
+let flag = 0
 
-let heading = ["First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation", "Edit", "Delete"]
+let heading = ["S. No.", "First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation", "Edit", "Delete"]
 let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "salary", "designation"]
 
 let output = '<table>'
@@ -57,14 +58,15 @@ function loadTable(json) {
 
     //adding table headings
     output += '<tr>'
-    for (let i = 0; i < columns + 2; i++) {
+    for (let i = 0; i < columns + 3; i++) {
         output += `<th>${heading[i]}</th>`
     }
     output += '</tr>'
 
     //adding table rows
     for (let i = 0; i < rows; i++) {
-        output += '<tr>'
+        flag = 1
+        output += `<tr><td>${i+1}</td>`
 
         for (let j = 0; j < columns; j++) {
             let input = json[i][keyNames[j]]
@@ -74,16 +76,19 @@ function loadTable(json) {
         }
 
         //adding edit icon
-        output += `<td><img class="icon" id="edit${i+1}" src="../assets/ButtonAsset1.png" onclick="clicked(id)"></button></td>`
+        output += `<td><button class="icon" id="edit${i+1}" onclick="clicked(id)"><img src="../assets/ButtonAsset1.png"></button></td>`
 
         //adding delete icon
-        output += `<td><img class="icon" id="delete${i+1}" src="../assets/ButtonAsset2.png"></button></td>`
+        output += `<td><button class="icon" id="delete${i+1}"><img src="../assets/ButtonAsset2.png"></button></td>`
 
         output += '</tr>'
     }
 
     output += '</table>'
+
+
     document.getElementById('dvTable').innerHTML = output
+
 }
 
 clicked = (elemId) => {
