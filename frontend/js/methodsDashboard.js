@@ -1,44 +1,4 @@
-let data = [{
-    "firstName": "Soham",
-    "lastName": "Choudhury",
-    "email": "soham874@gmail.com",
-    "mobile": 9002832439,
-    "companyName": "Bridgelabz",
-    "salary": 1000,
-    "designation": "Student",
-}, {
-    "firstName": "Rakesh",
-    "lastName": "Sharma",
-    "email": "sharmarakesh@gmail.com",
-    "mobile": 9932629575,
-    "companyName": "Nasa",
-    "designation": "Engineer",
-}, {
-    "firstName": "Ravi",
-    "lastName": "Sashtri",
-    "email": "something@gmail.com",
-    "mobile": 9873764563,
-    "companyName": "Bcci",
-    "salary": 100000,
-    "designation": "Coach"
-}, {
-    "firstName": "Virat",
-    "lastName": "Kohli",
-    "email": "captain@gmail.com",
-    "mobile": 8523697412,
-    "companyName": "Bcci",
-    "salary": 34567,
-    "designation": "Batsman"
-}, {
-    "firstName": "Bappi",
-    "lastName": "Lahiri",
-    "email": "bappilahirirockz@gmail.com",
-    "mobile": 9878909876,
-    "companyName": "Bollywood",
-    "salary": 50000,
-    "designation": "Singer"
-}]
-
+let data
 let id = 0
 let flag = 0
 
@@ -48,7 +8,15 @@ let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "sala
 let output = '<table>'
 
 $(document).ready(function() {
-    loadTable(data)
+    $.getJSON('../JSON/data.json', function(data) {
+        try {
+            loadTable(data)
+            sessionStorage.setItem('data', JSON.stringify(data))
+            sessionStorage.setItem('keys', keyNames)
+        } catch {
+            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
+        }
+    });
 })
 
 function loadTable(json) {
@@ -94,7 +62,6 @@ function loadTable(json) {
 clicked = (elemId) => {
 
     sessionStorage.setItem('idNumber', elemId.split('edit')[1] * 1)
-    sessionStorage.setItem('data', JSON.stringify(data))
-    sessionStorage.setItem('keys', keyNames)
+
     window.open("../html/AddEdit.html", "_self")
 }
