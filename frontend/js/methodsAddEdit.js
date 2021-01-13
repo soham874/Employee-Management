@@ -31,6 +31,10 @@ populate = () => {
 checkInput = () => {
 
     for (let i = 0; i < 7; i++) {
+
+        $(`#field${i+1}`).css({ "background-color": "#ffffff", "transition": "all 0.4s" })
+        document.getElementById(`fieldres${i+1}`).innerHTML = ""
+
         let pattern = document.getElementById(`field${i+1}`).value
 
         if (pattern.length == 0 && i != 5) {
