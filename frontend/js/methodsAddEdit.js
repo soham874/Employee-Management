@@ -1,6 +1,7 @@
 let id
 let data
 let keys = ["firstName", "lastName", "email", "mobile", "companyName", "salary", "designation"]
+let heading = ["First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation"]
 
 const patternFirstName = RegExp('^[A-Z][a-z]{2,}$')
 const patternLastName = RegExp('^[A-Z][a-z]{2,}$')
@@ -34,13 +35,13 @@ checkInput = () => {
 
         if (pattern.length == 0 && i != 5) {
             $(`#field${i+1}`).css({ "background-color": "#FFEEF0", "transition": "all 0.4s" })
-            document.getElementById(`fieldres${i+1}`).innerHTML = '<div style="color:red;transition:0.5s">This field cannot be left empty!!</div>'
+            document.getElementById(`fieldres${i+1}`).innerHTML = `<div style="color:red;transition:0.5s">${heading[i]} cannot be left empty!!</div>`
         } else if ((!regexArray[i].test(pattern) && i != 5) || (i == 5 && pattern.length != 0 && !regexArray[i].test(pattern))) {
             $(`#field${i+1}`).css({ "background-color": "#FFEEF0", "transition": "all 0.4s" })
-            document.getElementById(`fieldres${i+1}`).innerHTML = '<div style="color:red;transition:0.5s">This field information does not match!!</div>'
-        } else {
+            document.getElementById(`fieldres${i+1}`).innerHTML = `<div style="color:red;transition:0.5s">${heading[i]} information does not match!!</div>`
+        } else if ((i != 5) || (i == 5 && pattern.length != 0)) {
             $(`#field${i+1}`).css({ "background-color": "#EDFDF9", "transition": "all 0.4s" })
-            document.getElementById(`fieldres${i+1}`).innerHTML = '<div style="color:green;transition:0.5s">This information is acceptable!!!!</div>'
+            document.getElementById(`fieldres${i+1}`).innerHTML = `<div style="color:green;transition:0.5s">${heading[i]} is acceptable!!!!</div>`
         }
 
     }
