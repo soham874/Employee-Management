@@ -1,6 +1,5 @@
 let data
 let id = 0
-let flag = 0
 
 let heading = ["S. No.", "First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation", "Edit", "Delete"]
 let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "salary", "designation"]
@@ -10,11 +9,15 @@ let output = '<table>'
 $(document).ready(function() {
     $.getJSON('../JSON/data.json', function(data) {
         try {
-            loadTable(data)
+            if (data.length != 0)
+                loadTable(data)
+            else
+                document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
+
             sessionStorage.setItem('data', JSON.stringify(data))
             sessionStorage.setItem('keys', keyNames)
         } catch {
-            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
+            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Error in loading database!</h1>'
         }
     });
 })
@@ -26,16 +29,18 @@ function loadTable(json) {
 
     //adding table headings
     output += '<tr>'
-    for (let i = 0; i < columns + 3; i++) {
+    for (let i = 0; i < heading.length; i++) {
         output += `<th>${heading[i]}</th>`
     }
     output += '</tr>'
 
     //adding table rows
     for (let i = 0; i < rows; i++) {
-        flag = 1
+
+        //adding serial number
         output += `<tr><td>${i+1}</td>`
 
+        //adding column data for a particular row
         for (let j = 0; j < columns; j++) {
             let input = json[i][keyNames[j]]
             if (input == null)
