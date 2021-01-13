@@ -35,9 +35,7 @@ checkInput = () => {
         if (pattern.length == 0 && i != 5) {
             $(`#field${i+1}`).css({ "background-color": "#FFEEF0", "transition": "all 0.4s" })
             document.getElementById(`fieldres${i+1}`).innerHTML = '<div style="color:red;transition:0.5s">This field cannot be left empty!!</div>'
-        }
-
-        if ((!regexArray[i].test(pattern) && i != 5) || (i == 5 && pattern.length != 0 && !regexArray[i].test(pattern))) {
+        } else if ((!regexArray[i].test(pattern) && i != 5) || (i == 5 && pattern.length != 0 && !regexArray[i].test(pattern))) {
             $(`#field${i+1}`).css({ "background-color": "#FFEEF0", "transition": "all 0.4s" })
             document.getElementById(`fieldres${i+1}`).innerHTML = '<div style="color:red;transition:0.5s">This field information does not match!!</div>'
         } else {
