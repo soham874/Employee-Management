@@ -21,14 +21,13 @@ connectAndLoad = () => {
                     loadTable(dataSet)
                 else
                     document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
-
-                sessionStorage.setItem('keys', keyNames)
             } catch {
                 document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Error in loading database!</h1>'
             }
         },
         error: () => {
             document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Fatal server error!</h1>'
+            $("#edit0").css("display", "none")
         }
     })
 }
@@ -76,7 +75,13 @@ loadTable = (json) => {
 }
 
 clicked = (elemId) => {
-    sessionStorage.setItem('idNumber', elemId.split('edit')[1] * 1)
+    let sno = elemId.split('edit')[1] * 1
+    let documentId = 0
+
+    if (sno != 0)
+        documentId = dataSet[sno - 1]._id
+
+    sessionStorage.setItem('id', documentId)
     window.open("../html/AddEdit.html", "_self")
 }
 

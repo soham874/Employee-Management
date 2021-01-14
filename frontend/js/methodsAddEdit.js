@@ -18,14 +18,21 @@ $(document).ready(function() {
 })
 
 populate = () => {
-    id = sessionStorage.getItem('idNumber')
-    data = JSON.parse(sessionStorage.getItem('data'))
-
-    if (id != 0)
-        for (let i = 0; i < 7; i++)
-            if (data[id - 1][keys[i]] != null)
-                document.getElementById(`field${i+1}`).value = data[id - 1][keys[i]]
-
+    id = sessionStorage.getItem('id')
+    if (id != 0) {
+        $.ajax({
+            type: 'POST',
+            url: `http://localhost:3000/employee/read/${id}`,
+            success: (retrivedInfo) => {
+                for (let i = 0; i < 7; i++)
+                    if (retrivedInfo.data[0][keys[i]] != null)
+                        document.getElementById(`field${i+1}`).value = retrivedInfo.data[0][keys[i]]
+            },
+            error: () => {
+                alert("Failed to autofill form")
+            }
+        })
+    }
 }
 
 checkInput = () => {
