@@ -4,7 +4,7 @@ let services = require('../Services/service')
 class employeeController {
 
     createController = (req, res, next) => {
-
+        console.log(req.body)
         try {
             services.createService(req.body).then((result) => {
                 response.success = result.success
@@ -24,6 +24,7 @@ class employeeController {
     }
 
     getController = (req, res, next) => {
+
         try {
             services.getService(req).then((result) => {
                 response.success = result.success

@@ -3,6 +3,8 @@ let data
 let keys = ["firstName", "lastName", "email", "mobile", "companyName", "salary", "designation"]
 let heading = ["First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation"]
 
+let submitEditFlag = 0
+
 const patternFirstName = RegExp('^[A-Z][a-z]{2,}$')
 const patternLastName = RegExp('^[A-Z][a-z]{2,}$')
 const patternEmail = RegExp('^[a-z0-9]+([._+-][a-z0-9]+)*(@)[0-9a-zA-Z]+[.]{1}[a-z]{2,3}([.][a-z]{2})?$')
@@ -20,6 +22,7 @@ $(document).ready(function() {
 populate = () => {
     id = sessionStorage.getItem('id')
     if (id != 0) {
+        submitEditFlag = 1
         $.ajax({
             type: 'POST',
             url: `http://localhost:3000/employee/read/${id}`,
@@ -37,6 +40,8 @@ populate = () => {
 
 checkInput = () => {
 
+    let verificationFlag = 0
+
     for (let i = 0; i < 7; i++) {
 
         $(`#field${i+1}`).css({ "background-color": "#ffffff", "transition": "all 0.4s" })
@@ -45,9 +50,11 @@ checkInput = () => {
         let pattern = document.getElementById(`field${i+1}`).value
 
         if (pattern.length == 0 && i != 5) {
+            verificationFlag = 1
             $(`#field${i+1}`).css({ "background-color": "#FFEEF0", "transition": "all 0.4s" })
             document.getElementById(`fieldres${i+1}`).innerHTML = `<div style="color:red;transition:0.5s">${heading[i]} cannot be left empty!</div>`
         } else if ((!regexArray[i].test(pattern) && i != 5) || (i == 5 && pattern.length != 0 && !regexArray[i].test(pattern))) {
+            verificationFlag = 1
             $(`#field${i+1}`).css({ "background-color": "#FFEEF0", "transition": "all 0.4s" })
             document.getElementById(`fieldres${i+1}`).innerHTML = `<div style="color:red;transition:0.5s">${heading[i]} information does not match!</div>`
         } else if ((i != 5) || (i == 5 && pattern.length != 0)) {
@@ -56,4 +63,24 @@ checkInput = () => {
         }
 
     }
+
+    if (verificationFlag == 0)
+    // if (submitEditFlag == 0)
+        pushNewData()
+}
+
+pushNewData = () => {
+    let newData = {}
+    for (let i = 0; i < keys.length; i++)
+        newData[keys[i]] = document.getElementById(`field${i+1}`).value
+
+    $.ajax({
+        type: 'POST',
+        url: `http://localhost:3000/employee/create`,
+        data: JSON.stringify(newData),
+        dataType: "json",
+        contentType: "application/json",
+        success: (response) => { alert(response.message) },
+        error: () => { alert("Something broke, unable to add.") }
+    })
 }
