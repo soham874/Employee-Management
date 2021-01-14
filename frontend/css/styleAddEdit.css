@@ -53,3 +53,7 @@ form {
     background-color: coral;
     color: white;
 }
+
+*:focus {
+    outline: 0 !important;
+}
