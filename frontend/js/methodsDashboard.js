@@ -7,25 +7,36 @@ let keyNames = ["firstName", "lastName", "email", "mobile", "companyName", "sala
 let output = '<table>'
 
 $(document).ready(function() {
-    $.getJSON('../JSON/data.json', function(data) {
-        try {
-            if (data.length != 0)
-                loadTable(data)
-            else
-                document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
-
-            sessionStorage.setItem('data', JSON.stringify(data))
-            sessionStorage.setItem('keys', keyNames)
-        } catch {
-            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Error in loading database!</h1>'
-        }
-    });
+    connectAndLoad()
 })
 
-function loadTable(json) {
+connectAndLoad = () => {
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:3000/employee/read",
+        success: (retrivedInfo) => {
+            try {
+                if (retrivedInfo.data.length != 0)
+                    loadTable(retrivedInfo.data)
+                else
+                    document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
+
+                sessionStorage.setItem('data', JSON.stringify(retrivedInfo.data))
+                sessionStorage.setItem('keys', keyNames)
+            } catch {
+                document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Error in loading database!</h1>'
+            }
+        },
+        error: () => {
+            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Fatal internal server error!</h1>'
+        }
+    })
+}
+
+loadTable = (json) => {
 
     let rows = json.length
-    let columns = Object.keys(json[0]).length //7 columns
+    let columns = keyNames.length
 
     //adding table headings
     output += '<tr>'
@@ -52,7 +63,7 @@ function loadTable(json) {
         output += `<td><button class="icon" id="edit${i+1}" onclick="clicked(id)"><img src="../assets/ButtonAsset1.svg"></button></td>`
 
         //adding delete icon
-        output += `<td><button class="icon" id="delete${i+1}"><img src="../assets/ButtonAsset2.svg"></button></td>`
+        output += `<td><button class="icon" id="delete${i+1}" onclick="deleteDoc(id)"><img src="../assets/ButtonAsset2.svg"></button></td>`
 
         output += '</tr>'
     }
@@ -69,4 +80,8 @@ clicked = (elemId) => {
     sessionStorage.setItem('idNumber', elemId.split('edit')[1] * 1)
 
     window.open("../html/AddEdit.html", "_self")
+}
+
+deleteDoc = (elemNo) => {
+
 }
