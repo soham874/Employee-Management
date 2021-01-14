@@ -1,4 +1,4 @@
-let data
+let dataSet
 let id = 0
 
 let heading = ["S. No.", "First Name", "Last Name", "Email ID", "Phone number", "Company", "Salary", "Designation", "Edit", "Delete"]
@@ -16,19 +16,19 @@ connectAndLoad = () => {
         url: "http://localhost:3000/employee/read",
         success: (retrivedInfo) => {
             try {
-                if (retrivedInfo.data.length != 0)
-                    loadTable(retrivedInfo.data)
+                dataSet = retrivedInfo.data
+                if (dataSet.length != 0)
+                    loadTable(dataSet)
                 else
                     document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">No data found in record!</h1>'
 
-                sessionStorage.setItem('data', JSON.stringify(retrivedInfo.data))
                 sessionStorage.setItem('keys', keyNames)
             } catch {
                 document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Error in loading database!</h1>'
             }
         },
         error: () => {
-            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Fatal internal server error!</h1>'
+            document.getElementById('dvTable').innerHTML = '<h1 style="text-align:center;">Fatal server error!</h1>'
         }
     })
 }
@@ -76,12 +76,18 @@ loadTable = (json) => {
 }
 
 clicked = (elemId) => {
-
     sessionStorage.setItem('idNumber', elemId.split('edit')[1] * 1)
-
     window.open("../html/AddEdit.html", "_self")
 }
 
 deleteDoc = (elemNo) => {
+    let sno = elemNo.split('delete')[1] * 1
+    let documentId = dataSet[sno - 1]._id
 
+    $.ajax({
+        type: 'DELETE',
+        url: `http://localhost:3000/employee/delete/${documentId}`,
+    })
+
+    window.open("../html/dashboard.html", "_self")
 }
