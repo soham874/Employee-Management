@@ -65,8 +65,10 @@ checkInput = () => {
     }
 
     if (verificationFlag == 0)
-    // if (submitEditFlag == 0)
-        pushNewData()
+        if (submitEditFlag == 0)
+            pushNewData()
+        else
+            updateData()
 }
 
 pushNewData = () => {
@@ -83,4 +85,24 @@ pushNewData = () => {
         success: (response) => { alert(response.message) },
         error: () => { alert("Something broke, unable to add.") }
     })
+
+    window.setTimeout(window.open("../html/dashboard.html", "_self"), 5000)
+}
+
+updateData = () => {
+    let newData = {}
+    for (let i = 0; i < keys.length; i++)
+        newData[keys[i]] = document.getElementById(`field${i+1}`).value
+
+    $.ajax({
+        type: 'PUT',
+        url: `http://localhost:3000/employee/update/${id}`,
+        data: JSON.stringify(newData),
+        dataType: "json",
+        contentType: "application/json",
+        success: (response) => { alert(response.message) },
+        error: (response) => { alert(response.message) }
+    })
+
+    window.setTimeout(window.open("../html/dashboard.html", "_self"), 5000)
 }
