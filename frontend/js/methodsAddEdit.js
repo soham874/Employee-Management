@@ -22,6 +22,7 @@ $(document).ready(function() {
 populate = () => {
     id = sessionStorage.getItem('id')
     if (id != 0) {
+        document.getElementById("headertext").innerHTML = "Edit existing Employee Data"
         submitEditFlag = 1
         $.ajax({
             type: 'POST',
@@ -35,7 +36,8 @@ populate = () => {
                 alert("Failed to autofill form")
             }
         })
-    }
+    } else
+        document.getElementById("headertext").innerHTML = "Add new Employee Data"
 }
 
 checkInput = () => {
