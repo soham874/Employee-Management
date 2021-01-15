@@ -37,7 +37,7 @@ img {
     transition: all 0.5s
 }
 
-#edit0 {
+#create {
     padding: 10px;
     background-color: blue;
     border: none;
@@ -52,7 +52,7 @@ img {
     appearance: none;
 }
 
-#edit0:hover {
+#create:hover {
     transform: scale(1.05);
     transition: all 0.5s;
 }

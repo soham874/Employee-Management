@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 populate = () => {
     id = sessionStorage.getItem('id')
-    if (id != 0) {
+    if (id != "create") {
         document.getElementById("headertext").innerHTML = "Edit existing Employee Data"
         submitEditFlag = 1
         $.ajax({
@@ -84,11 +84,14 @@ pushNewData = () => {
         data: JSON.stringify(newData),
         dataType: "json",
         contentType: "application/json",
-        success: (response) => { alert(response.message) },
-        error: () => { alert("Something broke, unable to add.") }
+        success: (response) => {
+            console.log(response.message)
+            setTimeout(() => { window.open("../html/dashboard.html", "_self") }, 2000)
+        },
+        error: (error) => { console.log(error.message) }
     })
 
-    window.setTimeout(window.open("../html/dashboard.html", "_self"), 5000)
+
 }
 
 updateData = () => {

@@ -59,39 +59,31 @@ loadTable = (json) => {
         }
 
         //adding edit icon
-        output += `<td><button class="icon" id="edit${i+1}" onclick="clicked(id)"><img src="../assets/ButtonAsset1.svg"></button></td>`
+        output += `<td><button class="icon" id="${dataSet[i]._id}" onclick="clicked(id)"><img src="../assets/ButtonAsset1.svg"></button></td>`
 
         //adding delete icon
-        output += `<td><button class="icon" id="delete${i+1}" onclick="deleteDoc(id)"><img src="../assets/ButtonAsset2.svg"></button></td>`
+        output += `<td><button class="icon" id="${dataSet[i]._id}" onclick="deleteDoc(id)"><img src="../assets/ButtonAsset2.svg"></button></td>`
 
         output += '</tr>'
     }
 
     output += '</table>'
 
-
     document.getElementById('dvTable').innerHTML = output
 
 }
 
 clicked = (elemId) => {
-    let sno = elemId.split('edit')[1] * 1
-    let documentId = 0
 
-    if (sno != 0)
-        documentId = dataSet[sno - 1]._id
-
-    sessionStorage.setItem('id', documentId)
+    sessionStorage.setItem('id', elemId)
     window.open("../html/AddEdit.html", "_self")
 }
 
 deleteDoc = (elemNo) => {
-    let sno = elemNo.split('delete')[1] * 1
-    let documentId = dataSet[sno - 1]._id
 
     $.ajax({
         type: 'DELETE',
-        url: `http://localhost:3000/employee/delete/${documentId}`,
+        url: `http://localhost:3000/employee/delete/${elemNo}`,
     })
 
     window.open("../html/dashboard.html", "_self")
