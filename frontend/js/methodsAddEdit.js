@@ -85,10 +85,10 @@ pushNewData = () => {
         dataType: "json",
         contentType: "application/json",
         success: (response) => {
-            console.log(response.message)
+            alert(response.message)
             setTimeout(() => { window.open("../html/dashboard.html", "_self") }, 2000)
         },
-        error: (error) => { console.log(error.message) }
+        error: (error) => { alert(error.message) }
     })
 
 
@@ -105,9 +105,10 @@ updateData = () => {
         data: JSON.stringify(newData),
         dataType: "json",
         contentType: "application/json",
-        success: (response) => { alert(response.message) },
-        error: (response) => { alert(response.message) }
+        success: (response) => {
+            alert(response.message)
+            setTimeout(() => { window.open("../html/dashboard.html", "_self") }, 2000)
+        },
+        error: (error) => { alert(response.message) }
     })
-
-    window.setTimeout(window.open("../html/dashboard.html", "_self"), 5000)
 }
