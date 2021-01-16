@@ -88,7 +88,7 @@ pushNewData = () => {
             alert(response.message)
             setTimeout(() => { window.open("../html/dashboard.html", "_self") }, 2000)
         },
-        error: (error) => { alert(error.message) }
+        error: () => { alert("Record for this number already exists.") }
     })
 
 
@@ -109,6 +109,6 @@ updateData = () => {
             alert(response.message)
             setTimeout(() => { window.open("../html/dashboard.html", "_self") }, 2000)
         },
-        error: (error) => { alert(response.message) }
+        error: () => { alert("Record for this number already exists.") }
     })
 }
